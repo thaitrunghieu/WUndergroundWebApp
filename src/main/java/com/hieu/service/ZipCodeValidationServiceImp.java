@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ZipCodeValidationServiceImp implements ZipCodeValidationService {
     public boolean isValidZipCodeFormat(String zipCode) {
-        return Pattern.matches("\\d{5}", zipCode.trim());
+        return zipCode!=null && Pattern.matches("\\d{5}", zipCode.trim());
     }
 }

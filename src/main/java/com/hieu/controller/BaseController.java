@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.hieu.service.ZipCodeValidationService;
 import com.hieu.model.Weather;
 
@@ -21,7 +20,7 @@ public class BaseController {
     @Autowired
     private ZipCodeValidationService zipCodeValidationService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/")
     public String weather(ModelMap model) {
 
         model.addAttribute("weather", null);
@@ -31,11 +30,13 @@ public class BaseController {
         return VIEW_INDEX;
     }
 
-    @RequestMapping(value = "/", params = {"zip"}, method = RequestMethod.GET)
-    public String weatherWithGivenZip(@RequestParam("zip")String zipCode, ModelMap model) {
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String weatherWithGivenZip(Weather weather, ModelMap model) {
 
         String message;
-        Weather weather = null;
+
+        String zipCode = weather.getZipCode();
+        System.out.println(weather.getState() + ' ' + weather.getCity() + ' ' + weather.getZipCode());
         if (zipCodeValidationService.isValidZipCodeFormat(zipCode)) {
             weather = weatherUndergroundService.getWeather(zipCode);
             if (weather == null)
