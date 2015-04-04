@@ -24,9 +24,8 @@ public class BaseController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String weather(ModelMap model) {
 
-        Weather weather = null;
+        model.addAttribute("weather", null);
         model.addAttribute("message", "Please enter your zip code");
-        model.addAttribute("weather", weather);
 
         // Spring uses InternalResourceViewResolver and return back index.jsp
         return VIEW_INDEX;
@@ -39,12 +38,16 @@ public class BaseController {
         Weather weather = null;
         if (zipCodeValidationService.isValidZipCodeFormat(zipCode)) {
             weather = weatherUndergroundService.getWeather(zipCode);
-            message = "Weather data in your zip code is " + zipCode;
+            if (weather == null)
+                message = "Error: zipcode not found.";
+            else {
+                message = "Weather data for zip code " + zipCode + ":";
+            }
         }
         else
             message = "Error: invalid zip code format.";
-        model.addAttribute("message", message);
         model.addAttribute("weather", weather);
+        model.addAttribute("message", message);
 
         return VIEW_INDEX;
     }

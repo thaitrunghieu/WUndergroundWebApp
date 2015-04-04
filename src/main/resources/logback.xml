@@ -11,7 +11,7 @@
         </layout>
     </appender>
 
-    <logger name="com.hieu.controller" level="debug"
+    <logger name="com.hieu.service" level="debug"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
