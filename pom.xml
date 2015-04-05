@@ -30,13 +30,14 @@
           <groupId>javax.el</groupId>
           <artifactId>javax.el-api</artifactId>
           <version>${javax.el-api.version}</version>
+          <scope>test</scope>
       </dependency>
       <dependency>
           <groupId>org.glassfish.web</groupId>
           <artifactId>javax.el</artifactId>
           <version>${javax.el.version}</version>
+          <scope>test</scope>
       </dependency>
-
 
       <!-- Spring Core -->
       <dependency>

@@ -9,7 +9,6 @@ import org.junit.runners.Parameterized.Parameters;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import javax.validation.ConstraintViolation;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Set;
 import static org.junit.Assert.*;
@@ -39,14 +38,24 @@ public class WeatherValidationTest {
         int zipCodeViolation = 1;
 
         ArrayList<Object[]> objects = new ArrayList<>();
+
+        // invalid formatted zip codes
         objects.add(new Object[] {"", zipCodeViolation});
         objects.add(new Object[] {"-1234", zipCodeViolation});
         objects.add(new Object[] {"-56789", zipCodeViolation});
         objects.add(new Object[] {"valid", zipCodeViolation});
-        objects.add(new Object[] {"000", zipCodeViolation});
         objects.add(new Object[] {"0000O", zipCodeViolation});
+        objects.add(new Object[] {"123242", zipCodeViolation});
 
         Random random = new Random();
+        // random 10 invalid formatted zip codes
+        int randomNumber;
+        for (int i = 0; i < 10; i++) {
+            randomNumber = random.nextInt(1000);
+            objects.add(new Object[] {Integer.toString(randomNumber), zipCodeViolation});
+        }
+
+        // random 10 valid formatted zip codes
         int randomZipCode;
         for (int i = 0; i < 10; i++) {
             randomZipCode = random.nextInt(10000);
@@ -62,17 +71,4 @@ public class WeatherValidationTest {
         Set<ConstraintViolation<Weather>> constraintViolations = localValidatorFactoryBean.validate(weather);
         assertTrue(constraintViolations.size() == expectedViolations);
     }
-
-//    @Test
-//    public void validZipCodeTest() {
-//        final Weather weather = new Weather("77072");
-//        Set<ConstraintViolation<Weather>> constraintViolations = localValidatorFactoryBean.validate(weather);
-//        assertTrue(constraintViolations.size() == 0);
-//    }
-//
-//    @Test
-//    public void invalidZipCodeTest() {
-//        final Weather weather = new Weather("");
-//        Set<ConstraintViolation<Weather>> constraintViolations = localValidatorFactoryBean.validate(weather);
-//        assertTrue(constraintViolations.size() == 1);
 }
