@@ -7,9 +7,6 @@ import java.io.*;
 import java.net.URL;
 import org.json.JSONObject;
 
-/**
- * Created by Hieu on 4/4/2015.
- */
 @Component
 public class WeatherUnderGroundServiceImp implements WeatherUndergroundService {
 
@@ -17,11 +14,10 @@ public class WeatherUnderGroundServiceImp implements WeatherUndergroundService {
     private final String wuPathPrefix = "http://api.wunderground.com/api/" + wuApiKey + "/conditions/q/";
     private final String wuPathSuffix = ".json";
 
-    public Weather getWeather(String zipCode) {
+    public Weather getWeather(Weather weather) {
 
-        Weather weather = new Weather(zipCode);
         try {
-            URL url = new URL(wuPathPrefix + zipCode.trim() + wuPathSuffix);
+            URL url = new URL(wuPathPrefix + weather.getZipCode() + wuPathSuffix);
             InputStream inputStream = url.openStream();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));

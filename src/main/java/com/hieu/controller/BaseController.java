@@ -1,14 +1,16 @@
 package com.hieu.controller;
 
-import com.hieu.service.WeatherUndergroundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.hieu.model.Weather;
+import com.hieu.service.WeatherUndergroundService;
 
 import javax.validation.Valid;
 
@@ -31,17 +33,21 @@ public class BaseController {
     public String weatherWithGivenZip(@Valid @ModelAttribute("weather") Weather weather, BindingResult result, ModelMap model) {
 
         String message = "";
-        Weather newWeather = weather;
         if (!result.hasErrors()) {
-            newWeather = weatherUndergroundService.getWeather(weather.getZipCode());
-            if (!newWeather.getIsValidPlace()) {
-                message = "Zip Code not found";
-            }
+            weather = weatherUndergroundService.getWeather(weather);
+            if (!weather.getIsValidPlace())
+                message = "Zip Code not found.";
             else
-                message = "Weather data for zip code " + newWeather.getZipCode();
+                message = weather.toString();
+        }
+        else {
+            FieldError error = result.getFieldError();
+            if (error != null) {
+                message = error.getDefaultMessage();
+            }
         }
 
-        model.addAttribute("weather", newWeather);
+        model.addAttribute("weather", weather);
         model.addAttribute("message", message);
         return VIEW_INDEX;
     }

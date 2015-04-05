@@ -2,16 +2,13 @@ package com.hieu.model;
 
 import javax.validation.constraints.Pattern;
 
-/**
- * Created by Hieu on 4/4/2015.
- */
 public class Weather {
 
     private String city;
     private String state;
     private double temperatureInFarenheit;
 
-    @Pattern(regexp="\\d{5}", message = "invalid zip code format")
+    @Pattern(regexp="\\d{5}", message = "Invalid zip code format.")
     private String zipCode;
 
     private boolean isValidPlace;
@@ -21,7 +18,7 @@ public class Weather {
     }
 
     public Weather(String zipCode) {
-        this.zipCode = zipCode;
+        this.zipCode = zipCode.trim();
         isValidPlace = false;
     }
 
@@ -54,4 +51,8 @@ public class Weather {
     public boolean getIsValidPlace() { return isValidPlace; }
 
     public void setIsValidPlace(boolean isValidPlace) { this.isValidPlace = isValidPlace; }
+
+    public String toString() {
+        return this.getCity() + ", " + this.getState() + ": " + this.getTemperatureInFarenheit() + "\u00b0F";
+    }
 }

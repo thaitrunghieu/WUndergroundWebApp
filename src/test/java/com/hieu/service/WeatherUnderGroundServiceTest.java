@@ -1,8 +1,5 @@
 package com.hieu.service;
 
-/**
- * Created by Hieu on 4/4/2015.
- */
 import org.junit.Test;
 import com.hieu.model.Weather;
 
@@ -17,7 +14,7 @@ public class WeatherUnderGroundServiceTest {
         final String zipCode = "77072";
 
         WeatherUndergroundService wus = new WeatherUnderGroundServiceImp();
-        final Weather weather = wus.getWeather(zipCode);
+        final Weather weather = wus.getWeather(new Weather(zipCode));
         final String resultCity = weather.getCity();
 
         assertEquals(expectedCity, resultCity);
