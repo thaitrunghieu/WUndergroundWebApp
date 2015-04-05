@@ -33,6 +33,7 @@ public class WeatherUnderGroundServiceImp implements WeatherUndergroundService {
             weather.setCity(weatherData.getJSONObject("display_location").getString("city"));
             weather.setState(weatherData.getJSONObject("display_location").getString("state"));
             weather.setTemperatureInFarenheit(weatherData.getDouble("temp_f"));
+            weather.setZipCode(zipCode);
             return weather;
         }
 
