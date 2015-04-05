@@ -19,6 +19,7 @@ public class WeatherUnderGroundServiceImp implements WeatherUndergroundService {
 
     public Weather getWeather(String zipCode) {
 
+        Weather weather = new Weather(zipCode);
         try {
             URL url = new URL(wuPathPrefix + zipCode.trim() + wuPathSuffix);
             InputStream inputStream = url.openStream();
@@ -28,19 +29,18 @@ public class WeatherUnderGroundServiceImp implements WeatherUndergroundService {
 
             JSONObject jsonObject = new JSONObject(jsonText);
             JSONObject weatherData = jsonObject.getJSONObject("current_observation");
-            Weather weather = new Weather();
 
             weather.setCity(weatherData.getJSONObject("display_location").getString("city"));
             weather.setState(weatherData.getJSONObject("display_location").getString("state"));
             weather.setTemperatureInFarenheit(weatherData.getDouble("temp_f"));
-            weather.setZipCode(zipCode);
-            return weather;
+            weather.setIsValidPlace(true);
         }
 
         catch (Exception e) {
 
-            return null;
         }
+
+        return weather;
     }
 
     private static String readAll(Reader rd) throws IOException {

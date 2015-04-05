@@ -14,6 +14,17 @@ public class Weather {
     @Pattern(regexp="\\d{5}", message = "invalid zip code format")
     private String zipCode;
 
+    private boolean isValidPlace;
+
+    public Weather() {
+        isValidPlace = false;
+    }
+
+    public Weather(String zipCode) {
+        this.zipCode = zipCode;
+        isValidPlace = false;
+    }
+
     public String getCity(){ return city; }
 
     public void setCity(String city) {
@@ -39,4 +50,8 @@ public class Weather {
     public String getZipCode() { return zipCode; }
 
     public void setZipCode(String zipCode) { this.zipCode = zipCode; }
+
+    public boolean getIsValidPlace() { return isValidPlace; }
+
+    public void setIsValidPlace(boolean isValidPlace) { this.isValidPlace = isValidPlace; }
 }

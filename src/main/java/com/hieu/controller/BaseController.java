@@ -34,8 +34,7 @@ public class BaseController {
         Weather newWeather = weather;
         if (!result.hasErrors()) {
             newWeather = weatherUndergroundService.getWeather(weather.getZipCode());
-            if (newWeather == null) {
-                newWeather = weather;
+            if (!newWeather.getIsValidPlace()) {
                 message = "Zip Code not found";
             }
             else
