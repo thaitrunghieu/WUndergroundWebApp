@@ -1,11 +1,11 @@
 ## Synopsis
-Weather Underground Web Application is a small web application. The application take user input zip codes and display the location and temperature at the location. The application utilize Weather Underground API 
+Weather Underground Web Application is a small web application. The application take user input zip codes and display the location and temperature at the location. The application utilize Weather Underground API. 
 
 ## Motivation
-The application is created to demonstrate the following designs/techniques
+The application is created to demonstrate the following designs/techniques:
 
 * MVC design
-* Spring framework
+* Java Spring framework
 * Input validation
 * Unit Test
 

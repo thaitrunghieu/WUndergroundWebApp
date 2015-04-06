@@ -5,13 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.hieu.model.Weather;
 import com.hieu.service.WeatherUndergroundService;
-
 import javax.validation.Valid;
 
 @Controller
@@ -25,7 +23,7 @@ public class BaseController {
     @RequestMapping(value = "/")
     public String initialPage(ModelMap model) {
         model.addAttribute("weather", new Weather());
-        model.addAttribute("message", "Please enter your zip code");
+        model.addAttribute("message", "Please enter your zip code.");
         return VIEW_INDEX;
     }
 

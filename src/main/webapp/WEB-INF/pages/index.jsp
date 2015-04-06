@@ -2,7 +2,6 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 </head>
 <body>
 <h1>Local Weather Viewer</h1>

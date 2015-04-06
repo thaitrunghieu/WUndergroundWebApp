@@ -32,4 +32,15 @@ public class WeatherUnderGroundServiceTest {
 
         assertFalse(weather.getIsValidPlace());
     }
+
+    @Test
+    public void invalidZipCodeFormatTest() {
+
+        final String zipCode = "";
+
+        WeatherUndergroundService wus = new WeatherUnderGroundServiceImp();
+        final Weather weather = wus.getWeather(new Weather(zipCode));
+
+        assertFalse(weather.getIsValidPlace());
+    }
 }
