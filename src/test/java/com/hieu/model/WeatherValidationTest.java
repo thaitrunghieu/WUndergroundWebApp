@@ -47,6 +47,9 @@ public class WeatherValidationTest {
         objects.add(new Object[] {"0000O", zipCodeViolation});
         objects.add(new Object[] {"123242", zipCodeViolation});
 
+        // valid format zip code with preceding and trailing spaces
+        objects.add(new Object[] {"   98008  ", noViolation});
+
         Random random = new Random();
         // random 10 invalid formatted zip codes
         int randomNumber;
